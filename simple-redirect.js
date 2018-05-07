@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 const http = require('http');
 const querystring = require('querystring');
 
@@ -26,8 +28,9 @@ var urlProcessor = ({
     this.key = key;
     
     this.context.storage.get(function (error, data) {
-      if (error) 
-        return cb(error);
+      if (error) {
+        return ; // cb(error);
+      }
       data = data || { counter: 1 };
       if ( key in data ) {
         urlProcessor.processData(data[key]);
@@ -38,13 +41,12 @@ var urlProcessor = ({
   },
   
   saveData : function ( k, v ) {
-     storage = this.context.storage;
+     let storage = this.context.storage;
      storage.get(function (error, data) {
-          if (error) return cb(error);
           
           data[k] = v;
           storage.set(data, function (error) {
-              if (error) return cb(error);
+              if (error) { return; } //  cb(error); 
           });
     });
   },
@@ -60,8 +62,9 @@ var urlProcessor = ({
   },
    
    checkData : function() {
-     if ( this.urlData === undefined )
+     if ( this.urlData === undefined ) {
         throw( new Error('No data')); 
+   		}
    },
    
    incLocalCounter : function () {
