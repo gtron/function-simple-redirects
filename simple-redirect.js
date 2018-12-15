@@ -58,7 +58,7 @@ var urlProcessor = ({
   
   sendRedirect : function (code = 404, destination = '') {
     this.res.writeHead(code, { 'Content-Type': 'text/html ', 'Location' : destination });
-    this.res.end('<a href="'+destination+'">Continue &raquo;</a>');
+    this.res.end('<a href="' + destination + '">Continue &raquo;</a>');
   },
    
    checkData : function() {
